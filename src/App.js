@@ -14,7 +14,6 @@ class App extends Component {
     this.removeNote = this.removeNote.bind(this);
 
     this.app = firebase.initializeApp(DB_CONFIG);
-
     this.database = this.app.database().ref().child('notes');
 
     // Setup React state of component
@@ -41,10 +40,14 @@ class App extends Component {
 
     this.database.on('child_removed', snap => {
       for(let i=0; i < previousNotes.length; i++){
-        if(previousNotes[i].idd === snap.key){
+        if(previousNotes[i].id === snap.key){
           previousNotes.splice(i, 1);
         }
       } 
+
+      this.setState({
+        notes: previousNotes
+      })
     })
   }
   addNote(note){
