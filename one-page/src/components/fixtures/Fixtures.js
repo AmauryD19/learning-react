@@ -1,3 +1,4 @@
+
 export const establishments = [
     {
         id : "0890786GH",
